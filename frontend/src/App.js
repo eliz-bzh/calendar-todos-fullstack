@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import './App.css';
-import { Calendar, Drawer } from './components';
+import { CalendarTodos, SingIn, SingUp } from './pages';
+import { Route, Routes } from "react-router-dom";
 
 function App() {
 
-  const [clickedDate, setClickedDate] = useState(new Date(new Date().getTime() + 10800000));
-
-  const click = (date)=> {
-    setClickedDate(date);
-  }
-
   return (
-    <div className='content'>
-      <Calendar click={click} />
-      <Drawer dateTodos={clickedDate} />
-    </div>
+    <Routes>
+      <Route path="/" element={<CalendarTodos/>} />
+      <Route path='/login' element={<SingIn/>} />
+      <Route path='/register' element={<SingUp/>} />
+    </Routes>
   );
 }
 
