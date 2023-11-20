@@ -11,6 +11,7 @@ function App() {
       <Route path='/register' element={<SingUp/>} />
     </Routes>
   );
+
 }
 
 export default App;
