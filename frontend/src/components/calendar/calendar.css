@@ -32,25 +32,23 @@ ol, li {
 .day-of-week, .days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    padding: 0rem 1.5rem;
-    border: 1px solid lightgray;
+    margin: 0rem 3rem;
+}
+
+.day-of-week {
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: lightgray;
 }
 
 .days-grid {
     grid-template-rows: repeat(6, 1fr);
-    
 }
 
 .calendar-day {
-    /*display: flex;
-    justify-content: flex-end;
-    position: relative;
-    min-height: 100px;
-    font-size: 20px;
-    background-color: #fff;*/
     display: grid;
     position: relative;
-    min-height: 100px;
+    height: 95px;
     font-size: 20px;
     background-color: #fff;
     border-bottom: 1px solid lightgray;
@@ -58,8 +56,6 @@ ol, li {
     grid-template: auto auto auto / auto;
     grid-template-rows: max-content;
     padding-right: 5px;
-    /*color: var(--text);
-    border-color: solid 1px var(--text);*/
 }
 
 .calendar-day p {
@@ -67,7 +63,7 @@ ol, li {
     border-radius: 0 10% 10% 0;
     border-left: 2px solid #0d6efd;
     background-color: rgba(13, 110, 253, 0.1);
-    margin: 1px 0 0 0;
+    margin: 2px 0 0 0;
     width: 100%;
     height: max-content;
     text-overflow: ellipsis;
