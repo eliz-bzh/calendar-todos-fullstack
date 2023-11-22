@@ -1,53 +1,62 @@
-import { React } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import './profile.css';
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const Profile = () => {
 
-    const { user } = useAuth();
-
+    const [visible, setVisible] = useState(false);
+    const sortRef = useRef();
+    const navigate = useNavigate();
+    const { user, signOut } = useAuth();
     
     const handleClick = (e) => {
-        console.log('logout')
-        Cookies.remove('session');
-        Cookies.remove('session.sig');
-        //singOut(()=>navigate('/', { replace: true })) //not working
+        
+        signOut(()=>navigate('/login', { replace: true }))
     }
 
-    const showProfile = (e) => {
-        console.log('show');
-        //card.classList.toggle('profile--expanded');
+    const hiddenProfile = (visible) => {
         const card = document.querySelector('.card');
-        card.classList.toggle('container-profile--expanded');
+        if(card){
+            card.style = hiddenClass;
+            setTimeout(()=>setVisible(visible), 600)
+        }
     }
 
-    const hidden = (e)=>{
-        console.log('hidde')
-        const card = document.querySelector('.card');
-        card.classList.toggle('container-profile--expanded');
+    const showProfile = (e)=>{
+        setVisible(!visible)
     }
+
+    const handleOutsideClick = (event) => {
+        const path = event.path || (event.composedPath && event.composedPath());//for Firefox event.path
+        if (!path.includes(sortRef.current)) {
+            hiddenProfile(false)
+        }
+    }
+
+    useEffect(() => {
+        document.body.addEventListener('click', handleOutsideClick);
+    }, [])
+
+    const hiddenClass = 'animation: unreveal 0.6s ease';
+
+    const showClass = { animation: 'reveal 0.6s ease' };
 
     return(
-        <div className="container-profile">
-            <div className="card container-profile--unexpanded" tabIndex="-1">
-            <div className="header-container">
-                <button className="btn-close text-reset" onClick={hidden} aria-label="Close"></button>
-            </div>
-                <div className="top-container">
-                    <img src="https://i.imgur.com/G1pXs7D.jpg" className="img-fluid profile-image" width="70"/>
-                    
-                    <div className="ml-3">
-                        <h5 className="name">{user.login}</h5>
-                        <p className="mail">{user.role}</p>
+        <div ref={sortRef} className="container-profile">
+            {visible && <div className='card' style={showClass} tabIndex="-1">
+                    <div className="top-container">
+                        <img src="https://i.imgur.com/G1pXs7D.jpg" className="img-fluid profile-image" width="70"/>
+                        
+                        <div className="ml-3">
+                            <h5 className="name">{user.login}</h5>
+                            <p className="mail">{user.role}</p>
+                        </div>
                     </div>
-                </div>
 
-                <Link className="middle-container link mt-3 p-2" onClick={(e)=>handleClick(e)} to={'/login'}>LogOut</Link>
-
-            </div>
-            <img src="https://i.imgur.com/G1pXs7D.jpg" onClick={(e)=>showProfile(e)} className="img-fluid profile-image img-circle" width="40"/>
+                    <button className="btn middle-container link mt-3 p-2" onClick={(e)=>handleClick(e)}>LogOut</button>
+            </div>}
+            <img src="https://i.imgur.com/G1pXs7D.jpg" onClick={visible?()=>hiddenProfile(!visible):()=>showProfile()} className="img-fluid profile-image img-circle" width="40"/>
         </div>
     )
 }
