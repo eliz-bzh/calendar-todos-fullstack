@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import './pages.css';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const SingIn = () => {
 
@@ -9,6 +10,10 @@ const SingIn = () => {
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const { singIn } = useAuth();
+
+    const fromPage = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,28 +21,25 @@ const SingIn = () => {
             login: login,
             password: password
         })
-        .then(({status, data})=>{
-            if(status === 200){
-                navigate('/');
-                setLogin('');
-                setPassword('');
-            }else{console.log(data);}
+        .then(({data})=>{
+            singIn(data.user, ()=>navigate(fromPage, {replace: true}));
         }).catch((e)=>console.log(e))
     }
 
     return(
         <div className="container-pages">
-            <h1>SingIn</h1>
+            <h1>Sing in</h1>
             <form onSubmit={handleSubmit}>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" value={login} onChange={(e)=>setLogin(e.target.value)} />
+                <div className="form-group">
+                    <label>Username</label>
+                    <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" value={login} onChange={(e)=>setLogin(e.target.value)} />
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary btn-block">Sing in</button>
+                <Link to={'/register'}>Create an account</Link>
             </form>
         </div>
     )

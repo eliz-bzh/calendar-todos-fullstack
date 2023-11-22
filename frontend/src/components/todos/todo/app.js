@@ -137,7 +137,7 @@ const Todos = ({ dateTodos }) => {
                     <button className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Item</button>
                 </div>
 
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">

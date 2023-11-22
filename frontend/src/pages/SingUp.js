@@ -32,15 +32,15 @@ const SingUp = () => {
         <div className="container-pages">
             <h1>SingUp</h1>
             <form onSubmit={handleSubmit}>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" value={username} onChange={(e)=>setUsername(e.target.value)} />
+                <div className="form-group">
+                    <label>Username</label>
+                    <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" value={username} onChange={(e)=>setUsername(e.target.value)} />
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>
     )
