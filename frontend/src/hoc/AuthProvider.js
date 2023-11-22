@@ -37,6 +37,8 @@ export const AuthProvider = ({children}) => {
 
     const signOut = (callback) => {
         setUser(null);
+        Cookies.remove('session');
+        Cookies.remove('session.sig');
         callback();
     } 
 
