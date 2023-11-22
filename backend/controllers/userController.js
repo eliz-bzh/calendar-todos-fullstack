@@ -58,10 +58,18 @@ exports.login = async (req, res) => {
     if (user) {
       //token
       req.session.user = user;
-      res.send('ok')
+      res.json({user: user})
       return;
     }
     res.sendStatus(403);
+}
+
+exports.getUserSession = (req, res) => {
+    if(!req.session.user){
+        res.status(401).send('Unauthorized');
+        return;
+    }
+    res.status(200).json({user: req.session.user})
 }
 
 exports.delete = (req, res) => {
