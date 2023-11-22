@@ -1,5 +1,7 @@
-![Снимок](https://github.com/eliz-bzh/calendar-todos/assets/43619988/5b5955bf-0f3c-4c3c-b740-ccb5548697ea)
-![photo_4_2023-11-06_14-09-12](https://github.com/eliz-bzh/calendar-todos/assets/43619988/be114a76-1217-4c70-a80c-c56740b25d91)
+![Снимок](https://github.com/eliz-bzh/calendar-todos-fullstack/assets/43619988/d1cd9047-58c8-4cef-b643-0dd313e8a936)
+![Снимок4](https://github.com/eliz-bzh/calendar-todos-fullstack/assets/43619988/e1205d7c-fa7d-4a1c-820f-cf4dff417a1e)
+![Снимок2](https://github.com/eliz-bzh/calendar-todos-fullstack/assets/43619988/dacd8490-47fa-4066-8da4-b47a47021466)
+![Снимок3](https://github.com/eliz-bzh/calendar-todos-fullstack/assets/43619988/48b35b0c-545e-4332-b07d-5e945c10679a)
 
 
 # Getting Started with Create React App
