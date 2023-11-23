@@ -47,8 +47,14 @@ exports.create = async (req, res) => {
         defaults: { name, role, password: hash }
     }).then((data)=>{
         if(data[1])
-            res.status(200).send('Created new user!');
-        res.sendStatus(400).send('User with this login already exists')
+            res.status(200).json({
+                login: true,
+                message:'Created new user!'
+            });
+        res.json({
+            login: false,
+            message:'User with this login already exists'
+        });
     }).catch(e=>console.log(e))
 }
 
