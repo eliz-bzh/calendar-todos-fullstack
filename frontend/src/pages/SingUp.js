@@ -13,6 +13,10 @@ const initialState = {
 
 const SingUp = () => {
 
+    const regexNames = /^[a-zA-Z]{3,}$/;
+    const regexLogin = /^[a-z]([._-](?![._-])|[a-z0-9]){4,16}[a-z0-9]$/gm;
+    const regexPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
     const [state, setState] = useState(initialState);
     const { name, surname, login, password, toastMessage } = state;
 
@@ -59,21 +63,21 @@ const SingUp = () => {
                     <div className="row">
                         <div className="col">
                             <label>Name</label>
-                            <input type="name" required className={`form-control ${(name.valid)?('is-valid'):(typeof name.valid === 'boolean'?('is-invalid'):(''))}`} id="exampleInputName" placeholder="Enter name" value={name.value} onChange={(e)=>setState(prevState => ({...prevState, name:{value: e.target.value, valid:e.target.validity.valid}}))} />
+                            <input type="name" required className={`form-control ${(regexNames.test(name.value))?('is-valid'):(typeof name.valid === 'boolean'?('is-invalid'):(''))}`} id="inputName" placeholder="Enter name" pattern={regexNames.source} value={name.value} onChange={(e)=>setState(prevState => ({...prevState, name:{value: e.target.value, valid:e.target.validity.valid}}))} />
                         </div>
                         <div className="col">
                             <label>Surname</label>
-                            <input type="name" required className={`form-control ${(surname.valid)?('is-valid'):(typeof surname.valid === 'boolean'?('is-invalid'):(''))}`} id="exampleInputSurname" placeholder="Enter surname" value={surname.value} onChange={(e)=>setState(prevState => ({...prevState, surname:{value: e.target.value, valid: e.target.validity.valid}}))} />
+                            <input type="name" required className={`form-control ${(regexNames.test(surname.value))?('is-valid'):(typeof surname.valid === 'boolean'?('is-invalid'):(''))}`} id="inputSurname" placeholder="Enter surname" pattern={regexNames.source} value={surname.value} onChange={(e)=>setState(prevState => ({...prevState, surname:{value: e.target.value, valid: e.target.validity.valid}}))} />
                         </div>
                     </div>
                 </div>
                 <div className="form-group">
                     <label>Login</label>
-                    <input type="name" required className={`form-control ${(login.valid)?('is-valid'):(typeof login.valid === 'boolean'?('is-invalid'):(''))}`} id="exampleInputLogin" placeholder="Login" value={login.value} pattern="[a-z]{6,12}" title="Must be lowercase and 6-12 characters in length" onChange={(e)=>{setState(prevState => ({...prevState, login:{value: e.target.value, valid:e.target.validity.valid}}))}} />
+                    <input type="name" required className={`form-control ${(regexLogin.test(login.value))?('is-valid'):(typeof login.valid === 'boolean'?('is-invalid'):(''))}`} id="inputLogin" placeholder="Login" pattern={regexLogin.source} value={login.value} title="Must contain only lowercase letters and be 6-18 characters long. You can use special characters can be used ._- and numbers." onChange={(e)=>{setState(prevState => ({...prevState, login:{value: e.target.value, valid:e.target.validity.valid}}))}} />
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" required className={`form-control ${(password.valid)?('is-valid'):(typeof password.valid === 'boolean'?('is-invalid'):(''))}`} id="exampleInputPassword" placeholder="Password" value={password.value} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onChange={(e)=>setState(prevState => ({...prevState, password: {value: e.target.value, valid:e.target.validity.valid}}))} />
+                    <input type="password" required className={`form-control ${(regexPass.test(password.value))?('is-valid'):(typeof password.valid === 'boolean'?('is-invalid'):(''))}`} id="inputPassword" placeholder="Password" pattern={regexPass.source} value={password.value} title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onChange={(e)=>setState(prevState => ({...prevState, password: {value: e.target.value, valid:e.target.validity.valid}}))} />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">Sing Up</button>
             </form>
