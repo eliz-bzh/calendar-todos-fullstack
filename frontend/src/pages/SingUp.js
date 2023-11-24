@@ -14,7 +14,7 @@ const initialState = {
 const SingUp = () => {
 
     const regexNames = /^[a-zA-Z]{3,}$/;
-    const regexLogin = /^[a-z]([._-](?![._-])|[a-z0-9]){4,16}[a-z0-9]$/gm;
+    const regexLogin = /^[a-z][a-z0-9_\.\-]{4,16}[a-z0-9]$/;
     const regexPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
     const [state, setState] = useState(initialState);
